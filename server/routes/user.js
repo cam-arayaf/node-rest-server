@@ -18,7 +18,7 @@ app.get('/user', verifyToken, (req, resp) => {
 
 app.post('/user', [verifyToken, verifyAdminRole], (req, resp) => {
     let body = req.body;
-    if (!body.password) return resp.status(400).json({ ok: false, error: { message: 'Password is required' } });
+    if (!body.password) return resp.status(400).json({ ok: false, err: { message: 'Password is required' } });
     let user = new User({ name: body.name, email: body.email, password: bcrypt.hashSync(body.password, 10), role: body.role });
     user.save((err, userDB) => {
         if (err) return resp.status(400).json({ ok: false, err });
@@ -40,13 +40,13 @@ app.delete('/user/:id', [verifyToken, verifyAdminRole], (req, resp) => {
     let id = req.params.id;
     User.findByIdAndUpdate(id, { state: false }, { new: true }, (err, userDB) => {
         if (err) return resp.status(400).json({ ok: false, err });
-        if (!userDB) return resp.status(400).json({ ok: false, error: { message: 'User not found' } });
+        if (!userDB) return resp.status(400).json({ ok: false, err: { message: 'User not found' } });
         resp.json({ ok: true, user: userDB });
     });
 
     /*User.findByIdAndRemove(id, (err, userDB) => {
         if (err) return resp.status(400).json({ ok: false, err });
-        if (!userDB) return resp.status(400).json({ ok: false, error: { message: 'User not found' } });
+        if (!userDB) return resp.status(400).json({ ok: false, err: { message: 'User not found' } });
         resp.json({ ok: true, user: userDB });
     });*/
 });
