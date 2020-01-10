@@ -9,35 +9,13 @@ const validRoles = {
 }
 
 let userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required
-    },
-    email: {
-        type: String,
-        unique: true,
-        required
-    },
-    password: {
-        type: String,
-        required
-    },
-    img: {
-        type: String
-    },
-    role: {
-        type: String,
-        default: 'USER_ROLE',
-        enum: validRoles
-    },
-    state: {
-        type: Boolean,
-        default: true
-    },
-    google: {
-        type: Boolean,
-        default: false
-    },
+    name: { type: String, required },
+    email: { type: String, unique: true, required },
+    password: { type: String, required },
+    img: { type: String },
+    role: { type: String, default: 'USER_ROLE', enum: validRoles },
+    state: { type: Boolean, default: true },
+    google: { type: Boolean, default: false },
 });
 
 userSchema.methods.toJSON = function() {

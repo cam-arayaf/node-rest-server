@@ -14,8 +14,9 @@ app.use(require('./routes/index'));
 
 mongoose.connect(process.env.URL_DB, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true
+    useFindAndModify: false,
+    useCreateIndex: true,
+    useUnifiedTopology: true
 }, (err, resp) => {
     if (err) throw err;
     console.log('DB status: Online');
