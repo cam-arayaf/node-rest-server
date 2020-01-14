@@ -8,6 +8,7 @@ let productSchema = new Schema({
     name: { type: String, required },
     price: { type: Number, required },
     description: { type: String },
+    img: { type: String },
     available: { type: Boolean, default: true },
     category: { type: Schema.Types.ObjectId, ref: 'category', required },
     user: { type: Schema.Types.ObjectId, ref: 'user' }

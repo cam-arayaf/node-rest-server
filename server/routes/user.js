@@ -12,7 +12,7 @@ app.get('/user', verifyToken, (req, resp) => {
         if (usersDB.length === 0) return resp.status(400).json({ ok: false, err: { message: 'Users not found' } });
         if (err) return resp.status(500).json({ ok: false, err });
         User.countDocuments({ state: true }, (err, total) => {
-            resp.json({ ok: true, total, users: usersDB })
+            resp.json({ ok: true, total, users: usersDB });
         });
     });
 });
